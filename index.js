@@ -1,18 +1,18 @@
 const express = require('express')
-const app = express()
+const path = require('path')
 
-const PORT = 3000
+const app = express()
 
 app.get('/', (req, res) => {
     res.redirect('https://koodikrapula.fi');
 })
 
 app.get(['/shortener', '/short', '/sh', '/s'], (req, res) => {
-    res.send('Url shortened 🐱‍👤!')
+    res.sendFile(path.join(__dirname + '/shortener.html'));
 })
 
 app.get('/:path', (req, res) => {
     res.redirect(`https://koodikrapula.fi/${req.params.path}`);
 })
 
-app.listen(PORT)
+app.listen(process.env.port || 3000)
